@@ -8,6 +8,8 @@ import org.jcs.engine.gfx.SpriteSheet
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Dimension
+import java.awt.event.WindowAdapter
+import java.awt.event.WindowEvent
 import java.awt.image.BufferedImage
 import java.awt.image.DataBufferInt
 import javax.swing.JFrame
@@ -95,6 +97,15 @@ fun main(args: Array<String>) {
     frame.isAlwaysOnTop = true
     frame.isResizable = false
     frame.isVisible = true
+
+
+    frame.addWindowListener(object : WindowAdapter() {
+        override fun windowClosing(e: WindowEvent) {
+            gameLoop.stop()
+            Thread.sleep(500)
+            kotlin.system.exitProcess(0)
+        }
+    })
 
     gameLoop.start()
 }
