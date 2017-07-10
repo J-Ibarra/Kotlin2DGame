@@ -46,6 +46,11 @@ class MainKt : Canvas(), IGameLogic {
 
         screen!!.render(8, 8, 31, Color[5, 500, 50, 550])
 
+        screen!!.render(50, 100, 29, Color[555, 0, 0, 50], 0)
+        screen!!.render(58, 100, 29, Color[555, 0, 0, 50], 1)
+        screen!!.render(66, 100, 30, Color[555, 0, 0, 50], 0)
+        screen!!.render(74, 100, 30, Color[555, 0, 0, 50], 2)
+
         for (y in 0..HEIGHT - 1) {
             for (x in 0..WIDTH - 1) {
                 val cc = screen!!.pixels[x + y * screen!!.width]
