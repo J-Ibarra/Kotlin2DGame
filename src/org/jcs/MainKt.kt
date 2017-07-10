@@ -2,6 +2,7 @@ package org.jcs
 
 import org.jcs.engine.GameLoop
 import org.jcs.engine.IGameLogic
+import org.jcs.engine.gfx.Screen
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Dimension
@@ -19,15 +20,16 @@ class MainKt : Canvas(), IGameLogic {
     private val image: BufferedImage = BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB)
     private val pixels: IntArray = (image.raster.dataBuffer as DataBufferInt).data
 
+    private var screen: Screen? = null
+
     override fun init() {
-        println("init")
+        screen = Screen(WIDTH, HEIGHT)
     }
 
     var t = 0
     override fun tick() {
         t++
-        for (i in pixels.indices)
-            pixels[i] = t + i
+        screen!!.clear(t)
     }
 
     override fun render() {
@@ -36,6 +38,12 @@ class MainKt : Canvas(), IGameLogic {
             createBufferStrategy(3)
             requestFocus()
             return
+        }
+
+        for (y in 0..HEIGHT - 1) {
+            for (x in 0..WIDTH - 1) {
+                pixels[x + y * WIDTH] = screen!!.pixels[x + y * screen!!.width]
+            }
         }
 
         val g = bs.drawGraphics
