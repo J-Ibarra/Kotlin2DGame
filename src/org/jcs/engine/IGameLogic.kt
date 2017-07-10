@@ -1,4 +1,4 @@
-package org.jcs
+package org.jcs.engine
 
 interface IGameLogic {
     fun init()

@@ -1,7 +1,5 @@
 package org.jcs.engine
 
-import org.jcs.IGameLogic
-
 
 class GameLoop(val gameLogic: IGameLogic) : Runnable {
     private var running: Boolean = false
