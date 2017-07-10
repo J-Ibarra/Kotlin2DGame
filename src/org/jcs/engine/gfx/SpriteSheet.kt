@@ -15,6 +15,6 @@ class SpriteSheet(path: String) {
         height = image.height
         pixels = image.getRGB(0, 0, width, height, null, 0, width)
         for (i in pixels!!.indices)
-            pixels!![i] = pixels!![i] and 0xFFFFFF
+            pixels!![i] = (pixels!![i] and 0xff) / 64
     }
 }

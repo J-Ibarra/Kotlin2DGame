@@ -2,6 +2,7 @@ package org.jcs
 
 import org.jcs.engine.GameLoop
 import org.jcs.engine.IGameLogic
+import org.jcs.engine.gfx.Color
 import org.jcs.engine.gfx.Screen
 import org.jcs.engine.gfx.SpriteSheet
 import java.awt.BorderLayout
@@ -29,10 +30,8 @@ class MainKt : Canvas(), IGameLogic {
         screen = Screen(WIDTH, HEIGHT, sheet!!)
     }
 
-    var t = 0
     override fun tick() {
-        t++
-        screen!!.clear(t)
+
     }
 
     override fun render() {
@@ -42,12 +41,16 @@ class MainKt : Canvas(), IGameLogic {
             requestFocus()
             return
         }
-        
-        screen!!.render(10, 10, 31)
+
+        screen!!.clear(Color[555])
+
+        screen!!.render(8, 8, 31, Color[5, 500, 50, 550])
 
         for (y in 0..HEIGHT - 1) {
             for (x in 0..WIDTH - 1) {
-                pixels[x + y * WIDTH] = screen!!.pixels[x + y * screen!!.width]
+                val cc = screen!!.pixels[x + y * screen!!.width]
+                if (cc < 6 * 6 * 6)
+                    pixels[x + y * WIDTH] = Color.colors[cc]
             }
         }
 
@@ -84,6 +87,7 @@ fun main(args: Array<String>) {
     frame.pack()
     frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     frame.setLocationRelativeTo(null)
+    frame.isAlwaysOnTop = true
     frame.isResizable = false
     frame.isVisible = true
 
