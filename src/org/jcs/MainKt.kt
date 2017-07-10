@@ -9,15 +9,15 @@ class MainKt : IGameLogic {
     }
 
     override fun tick() {
-        println("tick")
+//        println("tick")
     }
 
     override fun render() {
-        println("render")
+//        println("render")
     }
 
-    override fun oneSecond() {
-        println("oneSecond")
+    override fun oneSecond(ups: Int, fps: Int) {
+        println("ups: $ups, fps: $fps")
     }
 
     override fun destroy() {
@@ -32,6 +32,6 @@ fun main(args: Array<String>) {
     val gameLoop = GameLoop(game)
 
     gameLoop.start()
-    Thread.sleep(20)
+    Thread.sleep(10000)
     gameLoop.stop()
 }

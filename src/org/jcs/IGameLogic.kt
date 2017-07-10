@@ -4,6 +4,6 @@ interface IGameLogic {
     fun init()
     fun tick()
     fun render()
-    fun oneSecond()
+    fun oneSecond(ups: Int, fps: Int)
     fun destroy()
 }
