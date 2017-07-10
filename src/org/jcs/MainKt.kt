@@ -3,6 +3,7 @@ package org.jcs
 import org.jcs.engine.GameLoop
 import org.jcs.engine.IGameLogic
 import org.jcs.engine.gfx.Screen
+import org.jcs.engine.gfx.SpriteSheet
 import java.awt.BorderLayout
 import java.awt.Canvas
 import java.awt.Dimension
@@ -21,9 +22,11 @@ class MainKt : Canvas(), IGameLogic {
     private val pixels: IntArray = (image.raster.dataBuffer as DataBufferInt).data
 
     private var screen: Screen? = null
+    private var sheet: SpriteSheet? = null
 
     override fun init() {
-        screen = Screen(WIDTH, HEIGHT)
+        sheet = SpriteSheet("SpriteSheet.png")
+        screen = Screen(WIDTH, HEIGHT, sheet!!)
     }
 
     var t = 0
@@ -39,6 +42,8 @@ class MainKt : Canvas(), IGameLogic {
             requestFocus()
             return
         }
+        
+        screen!!.render(10, 10, 31)
 
         for (y in 0..HEIGHT - 1) {
             for (x in 0..WIDTH - 1) {
